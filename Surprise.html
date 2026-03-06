@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Surprise</title>
+    <style>
+        /* General Setup */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'serif';
+            background-color: #E6E6FA; /* Simple Lavender */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Surprise Card Styling */
+        #card-container {
+            perspective: 1000px;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        #card {
+            width: 260px;
+            height: 160px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(106, 90, 205, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #b19cd9;
+        }
+
+        .card-text {
+            font-weight: bold;
+            color: #6a5acd;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* Main Birthday Content */
+        #main-content {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .message-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 30px;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 400px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Separated Birthday and Name */
+        .hb-text {
+            color: #6a5acd;
+            font-size: 2.2rem;
+            margin: 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .name-text {
+            color: #9370DB;
+            font-size: 3.5rem;
+            margin: 10px 0;
+            font-family: 'Brush Script MT', cursive, sans-serif;
+            display: block;
+        }
+
+        p { 
+            color: #555; 
+            font-size: 1.1rem;
+            line-height: 1.6; 
+            margin-top: 20px;
+        }
+
+        .future { 
+            margin-top: 20px; 
+            font-weight: bold; 
+            color: #8a78d6;
+            font-style: italic;
+        }
+
+        /* White Rose Animation */
+        .rose {
+            position: fixed;
+            top: -50px;
+            font-size: 2rem;
+            pointer-events: none;
+            z-index: 5;
+            filter: brightness(0) invert(1); /* Makes rose white */
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="card-container" onclick="revealSurprise()">
+        <div id="card">
+            <div class="card-icon">✉️</div>
+            <div class="card-text">You have a message!</div>
+            <div style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">(Click to open)</div>
+           
+       </div>
+    </div>
+
+    <div id="main-content">
+        <div class="message-box fade-in">
+            <h2 class="hb-text">Happy Birthday!</h2>
+            <span class="name-text">Muskan</span>
+            
+            <p>Wishing you a day that is as wonderful and bright as your smile.</p>
+            
+            <div class="future">
+                May your future be filled with immense success, <br> 
+                happiness, and beautiful memories! ✨
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function revealSurprise() {
+            document.getElementById('card-container').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            setInterval(createRose, 300);
+        }
+
+        function createRose() {
+            const rose = document.createElement('div');
+            rose.classList.add('rose');
+            rose.innerText = '🌹'; 
+            rose.style.left = Math.random() * 100 + "vw";
+            rose.style.animationDuration = Math.random() * 3 + 2 + "s";
+            rose.style.opacity = Math.random();
+            document.body.appendChild(rose);
+            setTimeout(() => { rose.remove(); }, 5000);
+        }
+    </script>
+</body>
+</html>
